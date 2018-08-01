@@ -1,0 +1,1812 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tombo package &mdash; Tombo 1.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Model Training (Advanced Users Only)" href="model_training.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Tombo
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tombo Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resquiggle.html">Re-squiggle Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modified_base_detection.html">Modified Base Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text_output.html">Text Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtering.html">Read Filtering Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rna.html">RNA Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_training.html">Model Training (Advanced Users Only)</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tombo package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tombo-python-api">Tombo Python API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-api-examples">Python API Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tombo.resquiggle">tombo.resquiggle module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tombo.tombo_helper">tombo.tombo_helper module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-tombo.tombo_stats">tombo.tombo_stats module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Tombo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>tombo package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tombo.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-tombo">
+<span id="tombo-package"></span><h1>tombo package<a class="headerlink" href="#module-tombo" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tombo-python-api">
+<h2>Tombo Python API<a class="headerlink" href="#tombo-python-api" title="Permalink to this headline">¶</a></h2>
+<p>The Tombo python API is intended to give users access to some of the lower level processing functions used throughout Tombo analysis pipelines.</p>
+<p>Primarily this includes inspection of per-read modified base detection results and observed (re-squiggle assigned) per-read signal levels.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Effort will be made to maintain this API interface introduced at Tombo version 1.3.1, but major structural changes to the Tombo framework may require changes to some API interface components. Such changes will be noted in github release notes where applicable.</p>
+</div>
+<div class="section" id="python-api-examples">
+<h3>Python API Examples<a class="headerlink" href="#python-api-examples" title="Permalink to this headline">¶</a></h3>
+<p>Import Tombo sub-modules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tombo</span> <span class="k">import</span> <span class="n">tombo_helper</span><span class="p">,</span> <span class="n">tombo_stats</span><span class="p">,</span> <span class="n">resquiggle</span>
+</pre></div>
+</div>
+<p>Extract normalized raw signal assigned to each genomic base from each read in a region:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># specify region of interest</span>
+<span class="n">reg_data</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">intervalData</span><span class="p">(</span>
+    <span class="n">chrm</span><span class="o">=</span><span class="s1">&#39;chr20&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">10100</span><span class="p">,</span> <span class="n">strand</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+
+<span class="c1"># parse Tombo index from previously re-squiggled set of reads</span>
+<span class="n">reads_index</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">TomboReads</span><span class="p">([</span><span class="s1">&#39;test_data/native_reads&#39;</span><span class="p">,])</span>
+<span class="c1"># extract reads that overlap this interval and then extract base signal</span>
+<span class="c1"># levels from 10 randomly selected reads</span>
+<span class="n">reg_base_levels</span> <span class="o">=</span> <span class="n">reg_data</span><span class="o">.</span><span class="n">add_reads</span><span class="p">(</span>
+    <span class="n">reads_index</span><span class="p">)</span><span class="o">.</span><span class="n">get_base_levels</span><span class="p">(</span><span class="n">num_reads</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Extracting per-read testing results:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_per_read_stats</span> <span class="o">=</span> <span class="n">tombo_stats</span><span class="o">.</span><span class="n">PerReadStats</span><span class="p">(</span>
+    <span class="s1">&#39;test_stats.alt_model.5mC.tombo.per_read_stats&#39;</span><span class="p">)</span>
+<span class="c1"># reg_per_read_stats contains a numpy array containing per-read stats</span>
+<span class="c1"># over all reads covering the region of interest</span>
+<span class="n">reg_per_read_stats</span> <span class="o">=</span> <span class="n">sample_per_read_stats</span><span class="o">.</span><span class="n">get_region_per_read_stats</span><span class="p">(</span>
+    <span class="n">reg_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run standard resquiggle algorithm (may cause errors on some reads):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span><span class="o">,</span> <span class="nn">mappy</span>
+
+<span class="c1"># set read values</span>
+<span class="n">fast5_fn</span><span class="p">,</span> <span class="n">reference_fn</span> <span class="o">=</span> <span class="s1">&#39;path/to/read.fast5&#39;</span><span class="p">,</span> <span class="s1">&#39;genome.fasta&#39;</span>
+<span class="n">fast5_data</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">fast5_fn</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">seq_samp_type</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">get_seq_sample_type</span><span class="p">(</span><span class="n">fast5_data</span><span class="p">)</span>
+
+<span class="c1"># prep aligner, signal model and parameters</span>
+<span class="n">aligner</span> <span class="o">=</span> <span class="n">mappy</span><span class="o">.</span><span class="n">Aligner</span><span class="p">(</span><span class="n">reference_fn</span><span class="p">,</span> <span class="n">preset</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;map-ont&#39;</span><span class="p">),</span> <span class="n">best_n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">std_ref</span> <span class="o">=</span> <span class="n">tombo_stats</span><span class="o">.</span><span class="n">TomboModel</span><span class="p">(</span><span class="n">seq_samp_type</span><span class="o">=</span><span class="n">seq_samp_type</span><span class="p">)</span>
+<span class="n">rsqgl_params</span> <span class="o">=</span> <span class="n">tombo_stats</span><span class="o">.</span><span class="n">load_resquiggle_parameters</span><span class="p">(</span><span class="n">seq_samp_type</span><span class="p">)</span>
+
+<span class="c1"># extract data from FAST5</span>
+<span class="n">map_results</span> <span class="o">=</span> <span class="n">resquiggle</span><span class="o">.</span><span class="n">map_read</span><span class="p">(</span><span class="n">fast5_data</span><span class="p">,</span> <span class="n">aligner</span><span class="p">,</span> <span class="n">std_ref</span><span class="p">)</span>
+<span class="n">all_raw_signal</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">get_raw_read_slot</span><span class="p">(</span><span class="n">fast5_data</span><span class="p">)[</span><span class="s1">&#39;Signal&#39;</span><span class="p">][:]</span>
+<span class="k">if</span> <span class="n">seq_samp_type</span><span class="o">.</span><span class="n">rev_sig</span><span class="p">:</span>
+    <span class="n">all_raw_signal</span> <span class="o">=</span> <span class="n">all_raw_signal</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">map_results</span> <span class="o">=</span> <span class="n">map_results</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">raw_signal</span><span class="o">=</span><span class="n">all_raw_signal</span><span class="p">)</span>
+
+<span class="c1"># run full re-squiggle</span>
+<span class="n">rsqgl_results</span> <span class="o">=</span> <span class="n">resquiggle</span><span class="o">.</span><span class="n">resquiggle_read</span><span class="p">(</span>
+    <span class="n">map_results</span><span class="p">,</span> <span class="n">std_ref</span><span class="p">,</span> <span class="n">rsqgl_params</span><span class="p">,</span> <span class="n">all_raw_signal</span><span class="o">=</span><span class="n">all_raw_signal</span><span class="p">)</span>
+
+<span class="c1"># or run individual steps</span>
+<span class="n">num_events</span> <span class="o">=</span> <span class="n">tombo_stats</span><span class="o">.</span><span class="n">compute_num_events</span><span class="p">(</span>
+    <span class="n">all_raw_signal</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">map_results</span><span class="o">.</span><span class="n">genome_seq</span><span class="p">),</span>
+    <span class="n">rsqgl_params</span><span class="o">.</span><span class="n">mean_obs_per_event</span><span class="p">)</span>
+<span class="n">valid_cpts</span><span class="p">,</span> <span class="n">norm_signal</span><span class="p">,</span> <span class="n">scale_values</span> <span class="o">=</span> <span class="n">resquiggle</span><span class="o">.</span><span class="n">segment_signal</span><span class="p">(</span>
+    <span class="n">map_results</span><span class="p">,</span> <span class="n">num_events</span><span class="p">,</span> <span class="n">rsqgl_params</span><span class="p">)</span>
+<span class="n">event_means</span> <span class="o">=</span> <span class="n">tombo_stats</span><span class="o">.</span><span class="n">compute_base_means</span><span class="p">(</span><span class="n">norm_signal</span><span class="p">,</span> <span class="n">valid_cpts</span><span class="p">)</span>
+<span class="n">dp_results</span> <span class="o">=</span> <span class="n">resquiggle</span><span class="o">.</span><span class="n">find_adaptive_base_assignment</span><span class="p">(</span>
+    <span class="n">valid_cpts</span><span class="p">,</span> <span class="n">event_means</span><span class="p">,</span> <span class="n">rsqgl_params</span><span class="p">,</span> <span class="n">std_ref</span><span class="p">,</span> <span class="n">map_results</span><span class="o">.</span><span class="n">genome_seq</span><span class="p">)</span>
+<span class="n">norm_signal</span> <span class="o">=</span> <span class="n">norm_signal</span><span class="p">[</span>
+    <span class="n">dp_results</span><span class="o">.</span><span class="n">read_start_rel_to_raw</span><span class="p">:</span>
+    <span class="n">dp_results</span><span class="o">.</span><span class="n">read_start_rel_to_raw</span> <span class="o">+</span> <span class="n">dp_results</span><span class="o">.</span><span class="n">segs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">segs</span> <span class="o">=</span> <span class="n">resquiggle</span><span class="o">.</span><span class="n">resolve_skipped_bases_with_raw</span><span class="p">(</span>
+    <span class="n">dp_results</span><span class="p">,</span> <span class="n">norm_signal</span><span class="p">,</span> <span class="n">rsqgl_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tombo.resquiggle">
+<span id="tombo-resquiggle-module"></span><h2>tombo.resquiggle module<a class="headerlink" href="#module-tombo.resquiggle" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tombo.resquiggle.get_read_seq">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">get_read_seq</code><span class="sig-paren">(</span><em>fast5_data</em>, <em>bc_grp='Basecall_1D_000'</em>, <em>bc_subgrp='BaseCalled_template'</em>, <em>seq_samp_type=seqSampleType(name='DNA'</em>, <em>rev_sig=False)</em>, <em>q_score_thresh=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#get_read_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.get_read_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract read sequence from the Fastq slot providing useful error messages</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fast5_data</strong> (<a class="reference internal" href="#tombo.tombo_helper.readData" title="tombo.tombo_helper.readData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.readData</span></code></a>) – read information</li>
+<li><strong>bc_grp</strong> (<em>str</em>) – group location containing read information (optional; default: ‘Basecall_1D_000’)</li>
+<li><strong>bc_subgrp</strong> (<em>str</em>) – sub-group location containing read information (optional; default: ‘BaseCalled_template’)</li>
+<li><strong>seq_samp_type</strong> (<a class="reference internal" href="#tombo.tombo_helper.seqSampleType" title="tombo.tombo_helper.seqSampleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.seqSampleType</span></code></a>) – sequencing sample type (default: DNA)</li>
+<li><strong>q_score_thresh</strong> (<em>float</em>) – basecalling mean q-score threshold (optional; default: 0/no filtering)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#tombo.tombo_helper.sequenceData" title="tombo.tombo_helper.sequenceData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.sequenceData</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.resquiggle.map_read">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">map_read</code><span class="sig-paren">(</span><em>fast5_data</em>, <em>aligner</em>, <em>std_ref</em>, <em>seq_samp_type=seqSampleType(name='DNA'</em>, <em>rev_sig=False)</em>, <em>bc_grp='Basecall_1D_000'</em>, <em>bc_subgrp='BaseCalled_template'</em>, <em>map_thr_buf=None</em>, <em>q_score_thresh=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#map_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.map_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract read sequence from the Fastq slot providing useful error messages</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fast5_data</strong> (<a class="reference internal" href="#tombo.tombo_helper.readData" title="tombo.tombo_helper.readData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.readData</span></code></a>) – read information</li>
+<li><strong>aligner</strong> (<em>mappy.Aligner</em>) – aligner object</li>
+<li><strong>std_ref</strong> (<a class="reference internal" href="#tombo.tombo_stats.TomboModel" title="tombo.tombo_stats.TomboModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_stats.TomboModel</span></code></a>) – canonical model (in order to extract extended genomic sequence)</li>
+<li><strong>seq_samp_type</strong> (<a class="reference internal" href="#tombo.tombo_helper.seqSampleType" title="tombo.tombo_helper.seqSampleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.seqSampleType</span></code></a>) – sequencing sample type (default: DNA)</li>
+<li><strong>bc_grp</strong> (<em>str</em>) – group location containing read information (optional; default: ‘Basecall_1D_000’)</li>
+<li><strong>bc_subgrp</strong> (<em>str</em>) – sub-group location containing read information (optional; default: ‘BaseCalled_template’)</li>
+<li><strong>map_thr_buf</strong> (<em>mappy.ThreadBuffer</em>) – mappy thread buffer object (optional; default: None)</li>
+<li><strong>q_score_thresh</strong> (<em>float</em>) – basecalling mean q-score threshold (optional; default: 0/no filtering)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#tombo.tombo_helper.resquiggleResults" title="tombo.tombo_helper.resquiggleResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleResults</span></code></a> containing valid mapping values</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.resquiggle.resquiggle_read">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">resquiggle_read</code><span class="sig-paren">(</span><em>map_res</em>, <em>std_ref</em>, <em>rsqgl_params</em>, <em>outlier_thresh=None</em>, <em>all_raw_signal=None</em>, <em>max_raw_cpts=200</em>, <em>min_event_to_seq_ratio=1.1</em>, <em>const_scale=None</em>, <em>skip_seq_scaling=False</em>, <em>seq_samp_type=seqSampleType(name='DNA'</em>, <em>rev_sig=False)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#resquiggle_read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.resquiggle_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify raw signal to genome sequence assignment, using adaptive banded dynamic programming</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_res</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleResults" title="tombo.tombo_helper.resquiggleResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleResults</span></code></a>) – mapping results</li>
+<li><strong>std_ref</strong> (<a class="reference internal" href="#tombo.tombo_stats.TomboModel" title="tombo.tombo_stats.TomboModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_stats.TomboModel</span></code></a>) – canonical base model</li>
+<li><strong>rsqgl_params</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleParams" title="tombo.tombo_helper.resquiggleParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleParams</span></code></a>) – parameters for the re-squiggle algorithm</li>
+<li><strong>outlier_thresh</strong> (<em>float</em>) – windsorize signal greater than this value (optional)</li>
+<li><strong>all_raw_signal</strong> (<cite>np.array::np.int64</cite>) – raw data acquisition (DAC) current signal values (optional; default use value in map_res)</li>
+<li><strong>max_raw_cpts</strong> (<em>int</em>) – read will fail if more than <cite>max_raw_cpts</cite> must be found to produce a valid re-squiggle results (optional)</li>
+<li><strong>min_event_to_seq_ratio</strong> (<em>float</em>) – minimum event to sequence ratio (optional)</li>
+<li><strong>const_scale</strong> (<em>float</em>) – constant scale value (optional; may be deprecated)</li>
+<li><strong>skip_seq_scaling</strong> (<em>bool</em>) – skip sequence-based scaling step</li>
+<li><strong>seq_samp_type</strong> (<a class="reference internal" href="#tombo.tombo_helper.seqSampleType" title="tombo.tombo_helper.seqSampleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.seqSampleType</span></code></a>) – sequencing sample type (default: DNA)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#tombo.tombo_helper.resquiggleResults" title="tombo.tombo_helper.resquiggleResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleResults</span></code></a> containing raw signal to genome sequence alignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.resquiggle.segment_signal">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">segment_signal</code><span class="sig-paren">(</span><em>map_res</em>, <em>num_events</em>, <em>rsqgl_params</em>, <em>outlier_thresh=None</em>, <em>const_scale=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#segment_signal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.segment_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize and segment raw signal as defined by <cite>rsqgl_params</cite> into <cite>num_events</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>map_res</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleResults" title="tombo.tombo_helper.resquiggleResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleResults</span></code></a>) – containing mapping results</li>
+<li><strong>num_events</strong> (<em>int</em>) – number of events to process</li>
+<li><strong>rsqgl_params</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleParams" title="tombo.tombo_helper.resquiggleParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleParams</span></code></a>) – parameters for the re-squiggle algorithm</li>
+<li><strong>outlier_thresh</strong> (<em>float</em>) – windsorize signal greater than this value (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ol class="arabic simple">
+<li>identified event positions (0-based)</li>
+<li>normalized raw signal</li>
+<li>scale values (<a class="reference internal" href="#tombo.tombo_helper.scaleValues" title="tombo.tombo_helper.scaleValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.scaleValues</span></code></a>)</li>
+</ol>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.resquiggle.find_adaptive_base_assignment">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">find_adaptive_base_assignment</code><span class="sig-paren">(</span><em>valid_cpts</em>, <em>event_means</em>, <em>rsqgl_params</em>, <em>std_ref</em>, <em>genome_seq</em>, <em>start_clip_bases=None</em>, <em>start_clip_params=startClipParams(bandwidth=1000</em>, <em>num_genome_bases=200)</em>, <em>seq_samp_type=seqSampleType(name='DNA'</em>, <em>rev_sig=False)</em>, <em>reg_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#find_adaptive_base_assignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.find_adaptive_base_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Align expected (from genome sequence) signal levels to observed using a dynamic programming approach with adaptive bandwidth start positions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>valid_cpts</strong> (<cite>np.array::np.int64</cite>) – raw signal base start locations</li>
+<li><strong>event_means</strong> (<cite>np.array::np.float64</cite>) – event normalized raw signal means</li>
+<li><strong>rsqgl_params</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleParams" title="tombo.tombo_helper.resquiggleParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleParams</span></code></a>) – parameters for the re-squiggle algorithm</li>
+<li><strong>std_ref</strong> (<a class="reference internal" href="#tombo.tombo_stats.TomboModel" title="tombo.tombo_stats.TomboModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_stats.TomboModel</span></code></a>) – canonical model</li>
+<li><strong>genome_seq</strong> (<em>str</em>) – genome sequence (from mapping)</li>
+<li><strong>start_clip_bases</strong> (<em>str</em>) – mapping read clipped bases</li>
+<li><strong>start_clip_params</strong> (<a class="reference internal" href="#tombo.tombo_helper.startClipParams" title="tombo.tombo_helper.startClipParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.startClipParams</span></code></a>) – start clip basecall params</li>
+<li><strong>seq_samp_type</strong> (<a class="reference internal" href="#tombo.tombo_helper.seqSampleType" title="tombo.tombo_helper.seqSampleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.seqSampleType</span></code></a>) – sequencing sample type (default: DNA)</li>
+<li><strong>reg_id</strong> (<em>str</em>) – debug</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#tombo.tombo_helper.dpResults" title="tombo.tombo_helper.dpResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.dpResults</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.resquiggle.resolve_skipped_bases_with_raw">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">resolve_skipped_bases_with_raw</code><span class="sig-paren">(</span><em>dp_res</em>, <em>norm_signal</em>, <em>rsqgl_params</em>, <em>max_raw_cpts=200</em>, <em>del_fix_window=2</em>, <em>max_del_fix_window=10</em>, <em>extra_sig_factor=1.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#resolve_skipped_bases_with_raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.resolve_skipped_bases_with_raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform dynamic-programming forward pass over raw signal z-scores. For details, see <a class="reference external" href="https://nanoporetech.github.io/tombo/resquiggle.html#resolve-skipped-bases">https://nanoporetech.github.io/tombo/resquiggle.html#resolve-skipped-bases</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dp_res</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tombo_helper.dpResults</span></code>) – dynamic programming results</li>
+<li><strong>norm_signal</strong> (<cite>np.array::np.float64</cite>) – normalized raw siganl</li>
+<li><strong>rsqgl_params</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleParams" title="tombo.tombo_helper.resquiggleParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleParams</span></code></a>) – parameters for the re-squiggle algorithm</li>
+<li><strong>max_raw_cpts</strong> (<em>int</em>) – maximum new changepoints to find from raw signal (optional)</li>
+<li><strong>del_fix_window</strong> (<em>int</em>) – initial bases to extend skipped base windows (optional)</li>
+<li><strong>max_del_fix_window</strong> (<em>int</em>) – max bases to extend skipped base windows (optional)</li>
+<li><strong>extra_sig_factor</strong> (<em>float</em>) – amount of extra signal required to perform signal space re-squiggle (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal notranslate"><span class="pre">np.array::np.int64</span></code> containing new deletion resolved base raw signal start positions</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.resquiggle.find_seq_start_in_events">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">find_seq_start_in_events</code><span class="sig-paren">(</span><em>event_means</em>, <em>r_ref_means</em>, <em>r_ref_sds</em>, <em>rsqgl_params</em>, <em>num_bases</em>, <em>num_events</em>, <em>seq_samp_type=None</em>, <em>reg_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#find_seq_start_in_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.find_seq_start_in_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify most probably start of expected levels within observed events</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_means</strong> (<cite>np.array::np.float64</cite>) – event normalized raw signal means</li>
+<li><strong>r_ref_means</strong> (<cite>np.array::np.float64</cite>) – expected base signal levels</li>
+<li><strong>r_ref_sds</strong> (<cite>np.array::np.float64</cite>) – expected base level SDs</li>
+<li><strong>rsqgl_params</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleParams" title="tombo.tombo_helper.resquiggleParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleParams</span></code></a>) – parameters for the re-squiggle algorithm</li>
+<li><strong>num_bases</strong> (<em>int</em>) – number of bases to process</li>
+<li><strong>num_events</strong> (<em>int</em>) – number of events to process</li>
+<li><strong>reg_id</strong> (<em>str</em>) – debug</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ol class="arabic simple">
+<li>event position (0-based) corresponding to the start of expected signal levels</li>
+<li>mean events per base identified from start of the read</li>
+</ol>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.resquiggle.find_static_base_assignment">
+<code class="descclassname">tombo.resquiggle.</code><code class="descname">find_static_base_assignment</code><span class="sig-paren">(</span><em>event_means</em>, <em>r_ref_means</em>, <em>r_ref_sds</em>, <em>rsqgl_params</em>, <em>reg_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/resquiggle.html#find_static_base_assignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.resquiggle.find_static_base_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Align expected (from genome sequence) signal levels to observed using a dynamic programming approach with static bandwidth start positions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>event_means</strong> (<cite>np.array::np.float64</cite>) – read base means</li>
+<li><strong>r_ref_means</strong> (<cite>np.array::np.float64</cite>) – expected base signal levels</li>
+<li><strong>r_ref_sds</strong> (<cite>np.array::np.float64</cite>) – expected base level SDs</li>
+<li><strong>rsqgl_params</strong> (<a class="reference internal" href="#tombo.tombo_helper.resquiggleParams" title="tombo.tombo_helper.resquiggleParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleParams</span></code></a>) – parameters for the re-squiggle algorithm</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>np.array::np.int64</cite> containng event to sequence mapping for full length of short read</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tombo.tombo_helper">
+<span id="tombo-tombo-helper-module"></span><h2>tombo.tombo_helper module<a class="headerlink" href="#module-tombo.tombo_helper" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tombo.tombo_helper.readData">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">readData</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#readData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.readData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nanopore read meta-data</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r_data</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">readData</span><span class="p">(</span>
+    <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">filtered</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">read_start_rel_to_raw</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">strand</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="s1">&#39;path/to/read.fast5&#39;</span><span class="p">,</span>
+    <span class="n">corr_group</span><span class="o">=</span><span class="s1">&#39;RawGenomeCorrected_000&#39;</span><span class="p">,</span> <span class="n">rna</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">sig_match_score</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">mean_q_score</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+
+<span class="c1"># output is a list of readData objects</span>
+<span class="n">reads_index</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">TomboReads</span><span class="p">([</span><span class="s1">&#39;test_data/native_reads&#39;</span><span class="p">,])</span>
+<span class="n">cs_reads</span> <span class="o">=</span> <span class="n">reads_index</span><span class="o">.</span><span class="n">get_cs_reads</span><span class="p">(</span><span class="s1">&#39;chr20&#39;</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start</strong> (<em>int</em>) – 0-based start mapped position</li>
+<li><strong>end</strong> (<em>int</em>) – 0-based open interval end mapped position</li>
+<li><strong>filtered</strong> (<em>bool</em>) – is this read filtered?</li>
+<li><strong>read_start_rel_to_raw</strong> (<em>int</em>) – start (in raw signal vector) of assigned bases</li>
+<li><strong>strand</strong> (<em>str</em>) – read mapped strand (‘+’, ‘-‘ or None)</li>
+<li><strong>fn</strong> (<em>str</em>) – raw read filename.</li>
+<li><strong>corr_group</strong> (<em>str</em>) – –corrected-group slot specified in re-squiggle command</li>
+<li><strong>rna</strong> (<em>bool</em>) – is this read RNA?</li>
+<li><strong>sig_match_score</strong> (<em>float</em>) – signal matching score. Default: None</li>
+<li><strong>mean_q_score</strong> (<em>float</em>) – mean basecalling q-score. Default: None</li>
+<li><strong>read_id</strong> (<em>str</em>) – read identifier Default: None</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.intervalData">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">intervalData</code><span class="sig-paren">(</span><em>chrm</em>, <em>start</em>, <em>end</em>, <em>strand=None</em>, <em>reg_id=None</em>, <em>reg_text=''</em>, <em>reads=None</em>, <em>seq=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genome/transcriptome interval information</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">int_data</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">intervalData</span><span class="p">(</span>
+    <span class="n">chrm</span><span class="o">=</span><span class="s1">&#39;chr20&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">10100</span><span class="p">,</span> <span class="n">strand</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All intervalData functions return the object in order to allow chaining of interval commands. (e.g. <code class="docutils literal notranslate"><span class="pre">int_data.add_reads(reads_index).add_seq()</span></code>)</p>
+</div>
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>chrm</em>, <em>start</em>, <em>end</em>, <em>strand=None</em>, <em>reg_id=None</em>, <em>reg_text=''</em>, <em>reads=None</em>, <em>seq=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a genome/transcriptome interval object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>chrm</strong> (<em>str</em>) – chromosome name.</li>
+<li><strong>start</strong> (<em>int</em>) – 0-based start position.</li>
+<li><strong>end</strong> (<em>int</em>) – 1-based (or open interval) end position.</li>
+<li><strong>strand</strong> (<em>str</em>) – interval strand (‘+’, ‘-‘ or None). Default: None</li>
+<li><strong>reg_id</strong> (<em>str</em>) – used to keep track of multiple intervals. Default: None</li>
+<li><strong>reg_text</strong> (<em>str</em>) – region description text. Default: ‘’</li>
+<li><strong>reads</strong> (<em>list</em>) – list of readData values overlapping region. Default: None</li>
+<li><strong>seq</strong> (<em>str</em>) – region genomic sequence. Default: None</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.add_reads">
+<code class="descname">add_reads</code><span class="sig-paren">(</span><em>reads_index</em>, <em>require_full_span=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.add_reads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.add_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add reads overlapping  this interval</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>reads_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.TomboReads" title="tombo.tombo_helper.TomboReads"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.TomboReads</span></code></a>) – reads index</li>
+<li><strong>require_full_span</strong> (<em>bool</em>) – require that reads span then entire interval (default: include all reads overlapping the interval)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.add_seq">
+<code class="descname">add_seq</code><span class="sig-paren">(</span><em>genome_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.add_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.add_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the forward strand genomic sequence for an interval from reads or genome_index if provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>genome_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.Fasta" title="tombo.tombo_helper.Fasta"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.Fasta</span></code></a>) – </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><em>include_reads=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a copy of this interval. Useful when adding sets of reads from multiple samples to compare.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>include_reads</strong> (<em>bool</em>) – include current reads slot in the new object (default: True)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.expand_interval">
+<code class="descname">expand_interval</code><span class="sig-paren">(</span><em>expand_width</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.expand_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.expand_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand this interval by the specified amount (effects only the start and stop attributes; NOT seq or reads)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>expand_width</strong> (<em>int</em>) – amount by which to expand the interval</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.get_base_levels">
+<code class="descname">get_base_levels</code><span class="sig-paren">(</span><em>read_rows=False</em>, <em>num_reads=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.get_base_levels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.get_base_levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract base levels from this interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>read_rows</strong> (<em>bool</em>) – return array with reads as rows (default: row columns)</li>
+<li><strong>num_reads</strong> (<em>int</em>) – maximal number of reads to output. randomly downsample if more reads are present (default: output all reads)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>np.array</cite> containing read mean levels with rows corresponding to interval position and columns to individual reads (or reverse if <cite>read_rows</cite>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.merge">
+<code class="descname">merge</code><span class="sig-paren">(</span><em>other_reg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a copy of this interval with the reads from this interval and <cite>other_reg</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other_reg</strong> (<a class="reference internal" href="#tombo.tombo_helper.intervalData" title="tombo.tombo_helper.intervalData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.intervalData</span></code></a>) – a second region to merge with this interval</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Aside from reads, all other attributes will be taken from this interval</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.intervalData.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#intervalData.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.intervalData.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update slots specified in keyword arguments (kwargs)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.TomboReads">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">TomboReads</code><span class="sig-paren">(</span><em>fast5s_basedirs</em>, <em>corrected_group='RawGenomeCorrected_000'</em>, <em>basecall_subgroups=None</em>, <em>for_writing=False</em>, <em>remove_filtered=True</em>, <em>sample_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of reads with associated meta-data from re-squiggle processing</p>
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>fast5s_basedirs</em>, <em>corrected_group='RawGenomeCorrected_000'</em>, <em>basecall_subgroups=None</em>, <em>for_writing=False</em>, <em>remove_filtered=True</em>, <em>sample_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse data from a list of re-squiggle fast5 directories</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fast5s_basedirs</strong> (<em>list</em>) – fast5 base directories, which have been processed by <code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">resquiggle</span></code></li>
+<li><strong>corrected_group</strong> (<em>str</em>) – Analysis slot containing the re-squiggle information (optional; default: ‘RawGenomeCorrected_000’)</li>
+<li><strong>basecall_subgroups</strong> (<em>list</em>) – basecall subgroups (optional; default: Process all basecall subgroups)</li>
+<li><strong>for_writing</strong> (<em>bool</em>) – open TomboReads to write index (optional; default: Open for reading and parse re-squiggled reads)</li>
+<li><strong>remove_filtered</strong> (<em>bool</em>) – remove filtered reads as indicated by index file (optional; default: True)</li>
+<li><strong>sample_name</strong> (<em>str</em>) – for verbose output</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.add_read_data">
+<code class="descname">add_read_data</code><span class="sig-paren">(</span><em>chrm</em>, <em>strand</em>, <em>read_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.add_read_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.add_read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add read data to the index</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>chrm</strong> (<em>str</em>) – chromosome name</li>
+<li><strong>strand</strong> (<em>str</em>) – strand (‘+’ or ‘-‘)</li>
+<li><strong>read_data</strong> (<a class="reference internal" href="#tombo.tombo_helper.readData" title="tombo.tombo_helper.readData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.readData</span></code></a>) – read information</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.get_all_cs">
+<code class="descname">get_all_cs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.get_all_cs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.get_all_cs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of all (chromosome, strand) stored in index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.get_coverage">
+<code class="descname">get_coverage</code><span class="sig-paren">(</span><em>chrm</em>, <em>pos</em>, <em>strand=None</em>, <em>invalid_return=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.get_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.get_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get coverage at specified position</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>chrm</strong> (<em>str</em>) – chromosome name</li>
+<li><strong>pos</strong> (<em>int</em>) – 0-based genomic position</li>
+<li><strong>strand</strong> (<em>str</em>) – interval strand (‘+’, ‘-‘ or None). Default: None (max over both strands)</li>
+<li><strong>invalid__return</strong> – return value for invalid (bad chrm, strand or pos beyond coverage) position. Default: 0</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.get_cs_coverage">
+<code class="descname">get_cs_coverage</code><span class="sig-paren">(</span><em>chrm</em>, <em>strand</em>, <em>invalid_return=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.get_cs_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.get_cs_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract coverage levels over a specified chromosome and strand</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>chrm</strong> (<em>str</em>) – chromosome name</li>
+<li><strong>strand</strong> (<em>str</em>) – strand (‘+’ or ‘-‘)</li>
+<li><strong>invalid_return</strong> – value to return for invalid (chrm, strand)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy array (numpy.int64) containing read coverage levels</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.get_cs_reads">
+<code class="descname">get_cs_reads</code><span class="sig-paren">(</span><em>chrm</em>, <em>strand</em>, <em>invalid_return=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.get_cs_reads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.get_cs_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the list of reads stored in a specified chromosome and strand</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>chrm</strong> (<em>str</em>) – chromosome name</li>
+<li><strong>strand</strong> (<em>str</em>) – strand (‘+’ or ‘-‘)</li>
+<li><strong>invalid_return</strong> – value to return for invalid (chrm, strand)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.is_empty">
+<code class="descname">is_empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.is_empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.is_empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Are any reads stored in the index?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.iter_coverage_regions">
+<code class="descname">iter_coverage_regions</code><span class="sig-paren">(</span><em>ctrl_reads_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.iter_coverage_regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.iter_coverage_regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get genome coverage for a set of reads</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ctrl_reads_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.TomboReads" title="tombo.tombo_helper.TomboReads"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.TomboReads</span></code></a>) – a second set of tombo reads to add for coverage</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Yeilds (chrm, strand, cs_cov, cs_cov_starts) indicating read coverage levels<p>cs_cov and cs_cov_starts are numpy arrays containing the coverage level and the 0-based genomic start positions of those intervals</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.iter_cs_coverage">
+<code class="descname">iter_cs_coverage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.iter_cs_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.iter_cs_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over coverage levels across all stored (chrm, strands)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.iter_reads">
+<code class="descname">iter_reads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.iter_reads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.iter_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over reads stored in the index</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.replace_index">
+<code class="descname">replace_index</code><span class="sig-paren">(</span><em>new_reads_index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.replace_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.replace_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace current reads index</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>new_reads_index</strong> (<em>dict</em>) – dictionary with (chrm, strand) pointing to lists of <a class="reference internal" href="#tombo.tombo_helper.readData" title="tombo.tombo_helper.readData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.readData</span></code></a> objects</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboReads.write_index_file">
+<code class="descname">write_index_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboReads.write_index_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboReads.write_index_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write index file</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Must be an index from only a single <code class="docutils literal notranslate"><span class="pre">fast5s_dir</span></code></p>
+<p class="last">Index filename will be: <cite>.[fast5s_dir].[corr_grp].tombo.index</cite>
+Note that this is a hidden file (starts with a “.”)</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.TomboMotif">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">TomboMotif</code><span class="sig-paren">(</span><em>raw_motif</em>, <em>mod_pos=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboMotif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboMotif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of a sequence motif, including potentially modified position</p>
+<dl class="attribute">
+<dt id="tombo.tombo_helper.TomboMotif.raw_motif">
+<code class="descname">raw_motif</code><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.raw_motif" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – input raw motif string</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tombo.tombo_helper.TomboMotif.motif_len">
+<code class="descname">motif_len</code><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.motif_len" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> – length of motif</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tombo.tombo_helper.TomboMotif.motif_pat">
+<code class="descname">motif_pat</code><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.motif_pat" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">re.compile</span></code> – python regular expression for this motif</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tombo.tombo_helper.TomboMotif.rev_comp_pat">
+<code class="descname">rev_comp_pat</code><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.rev_comp_pat" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">re.compile</span></code> – python regular expression for reverse complement of this motif</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tombo.tombo_helper.TomboMotif.is_palindrome">
+<code class="descname">is_palindrome</code><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.is_palindrome" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> – is the motif palindromic (in the genomic not literary definition)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tombo.tombo_helper.TomboMotif.mod_pos">
+<code class="descname">mod_pos</code><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.mod_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> – modified base position within motif</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tombo.tombo_helper.TomboMotif.mod_base">
+<code class="descname">mod_base</code><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.mod_base" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – modified base (should generally be A, C, G or T)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.TomboMotif.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>raw_motif</em>, <em>mod_pos=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#TomboMotif.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.TomboMotif.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse string motif</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>raw_motif</strong> (<em>str</em>) – sequence motif. supports IUPAC single letter codes (use T for RNA).</li>
+<li><strong>mod_pos</strong> (<em>int</em>) – 0-based position of modified base within the motif</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_helper.parse_motif_descs">
+<code class="descclassname">tombo.tombo_helper.</code><code class="descname">parse_motif_descs</code><span class="sig-paren">(</span><em>stat_motif_descs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#parse_motif_descs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.parse_motif_descs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse string motif descriptions as defined by <code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">plot</span> <span class="pre">roc</span> <span class="pre">--motif-descriptions</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stat_motif_descs</strong> (<em>str</em>) – string motifs description (see <code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">plot</span> <span class="pre">roc</span> <span class="pre">--motif-descriptions</span></code>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of tuples with <a class="reference internal" href="#tombo.tombo_helper.TomboMotif" title="tombo.tombo_helper.TomboMotif"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.TomboMotif</span></code></a> and motif/modification names</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.resquiggleParams">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">resquiggleParams</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#resquiggleParams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.resquiggleParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-squiggle parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>match_evalue</strong> (<em>float</em>) – expected value for matching event to sequence</li>
+<li><strong>skip_pen</strong> (<em>float</em>) – penalty for skipped sequence position</li>
+<li><strong>bandwidth</strong> (<em>int</em>) – adaptive bandwidth</li>
+<li><strong>max_half_z_score</strong> (<em>float</em>) – windsorize half z-scores above this value</li>
+<li><strong>running_stat_width</strong> (<em>int</em>) – running neighboring window width for segmentation scoring</li>
+<li><strong>min_obs_per_base</strong> (<em>int</em>) – minimum observations per genomic base</li>
+<li><strong>mean_obs_per_event</strong> (<em>int</em>) – mean number of raw obs. per event during segmentation</li>
+<li><strong>z_shift</strong> (<em>float</em>) – amount to shift z-scores for DP (derived from match_evalue)</li>
+<li><strong>stay_pen</strong> (<em>float</em>) – stay penalty for DP (derived from match_evalue)</li>
+<li><strong>use_t_test_seg</strong> (<em>bool</em>) – use t-test segmentation criterion (default: raw neighboring window difference)</li>
+<li><strong>band_bound_thresh</strong> (<em>int</em>) – bandwidth boundary threshold for determining if a read potentially left the adaptive bandwidth</li>
+<li><strong>start_bw</strong> (<em>int</em>) – bandwidth for read start identification</li>
+<li><strong>start_save_bw</strong> (<em>int</em>) – save bandwidth for read start identification (if start_bw_fails)</li>
+<li><strong>start_n_bases</strong> (<em>int</em>) – number of genomic bases to use for read start identification</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.startClipParams">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">startClipParams</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#startClipParams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.startClipParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters to identify read start using bases clipped from mapping</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>bandwidth</strong> (<em>int</em>) – bandwidth</li>
+<li><strong>num_genome_bases</strong> (<em>int</em>) – number of genome bases</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.resquiggleResults">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">resquiggleResults</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#resquiggleResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.resquiggleResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-squiggle results</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>align_info</strong> (<a class="reference internal" href="#tombo.tombo_helper.alignInfo" title="tombo.tombo_helper.alignInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.alignInfo</span></code></a>) – read alignment information</li>
+<li><strong>genome_loc</strong> (<a class="reference internal" href="#tombo.tombo_helper.genomeLocation" title="tombo.tombo_helper.genomeLocation"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.genomeLocation</span></code></a>) – genome mapping location</li>
+<li><strong>genome_seq</strong> (<em>str</em>) – mapped genome sequence</li>
+<li><strong>mean_q_score</strong> (<em>float</em>) – mean basecalling q-score</li>
+<li><strong>raw_signal</strong> (<em>np.array::np.float64</em>) – raw signal (optional)</li>
+<li><strong>channel_info</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.channelInfo</span></code>) – channel information (optional)</li>
+<li><strong>read_start_rel_to_raw</strong> (<em>int</em>) – read start within raw signal (optional)</li>
+<li><strong>segs</strong> (<em>np.array::np.int64</em>) – relative raw signal segment positions (optional)</li>
+<li><strong>scale_values</strong> (<a class="reference internal" href="#tombo.tombo_helper.scaleValues" title="tombo.tombo_helper.scaleValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.scaleValues</span></code></a>) – signal normalization scale values (optional)</li>
+<li><strong>sig_match_score</strong> (<em>float</em>) – expected to observed signal score (see <a class="reference internal" href="#tombo.tombo_stats.get_read_seg_score" title="tombo.tombo_stats.get_read_seg_score"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_stats.get_read_seg_score</span></code></a>; optional)</li>
+<li><strong>norm_params_changed</strong> (<em>bool</em>) – were scale parameters updated (optional)</li>
+<li><strong>start_clip_bases</strong> (<em>str</em>) – mapping clipped bases from start of read (optional)</li>
+<li><strong>stall_ints</strong> (<em>list</em>) – list of rna stall locations within raw signal (optional)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.alignInfo">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">alignInfo</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#alignInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.alignInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information from genomic read alignment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ID</strong> (<em>str</em>) – read identifier</li>
+<li><strong>Subgroup</strong> (<em>str</em>) – sub-group location containing read information (e.g. ‘BaseCalled_template’)</li>
+<li><strong>ClipStart</strong> (<em>int</em>) – number of bases clipped from beginning of basecalls</li>
+<li><strong>ClipEnd</strong> (<em>int</em>) – number of bases clipped from end of basecalls</li>
+<li><strong>Insertions</strong> (<em>int</em>) – number of inserted bases in alignment</li>
+<li><strong>Deletions</strong> (<em>int</em>) – number of delected bases in alignment</li>
+<li><strong>Matches</strong> (<em>int</em>) – number of matched bases in alignment</li>
+<li><strong>Mismatches</strong> (<em>int</em>) – number of mis-matched bases in alignment</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.genomeLocation">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">genomeLocation</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#genomeLocation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.genomeLocation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genomic location</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>Start</strong> (<em>int</em>) – 0-based genomic start position</li>
+<li><strong>Strand</strong> (<em>str</em>) – Strand (should be ‘+’ or ‘-‘)</li>
+<li><strong>Chrom</strong> (<em>str</em>) – Chromosome</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.sequenceData">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">sequenceData</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#sequenceData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.sequenceData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read sequence data from FASTQ record</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>seq</strong> (<em>str</em>) – read sequence</li>
+<li><strong>id</strong> (<em>str</em>) – read id (extracted from FASTQ record line)</li>
+<li><strong>mean_q_score</strong> (<em>float</em>) – mean q-score</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.dpResults">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">dpResults</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#dpResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.dpResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic programming results</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>read_start_rel_to_raw</strong> (<em>int</em>) – read start within raw signal</li>
+<li><strong>segs</strong> (<em>np.array::np.int64</em>) – relative raw signal segment positions</li>
+<li><strong>ref_means</strong> (<em>np.array::np.float64</em>) – expected signal levels</li>
+<li><strong>ref_sds</strong> (<em>np.array::np.float64</em>) – expected SD of signal levels</li>
+<li><strong>genome_seq</strong> (<em>str</em>) – mapped genome sequence</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.scaleValues">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">scaleValues</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#scaleValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.scaleValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal normaliztion scaling parameters. For details see <a class="reference external" href="https://nanoporetech.github.io/tombo/resquiggle.html#signal-normalization">https://nanoporetech.github.io/tombo/resquiggle.html#signal-normalization</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shift</strong> (<em>float</em>) – shift scaling parameter</li>
+<li><strong>scale</strong> (<em>float</em>) – scale scaling parameter</li>
+<li><strong>lower_lim</strong> (<em>float</em>) – lower windsorizing threshold</li>
+<li><strong>upper_lim</strong> (<em>float</em>) – upper windsorizing threshold</li>
+<li><strong>outlier_thresh</strong> (<em>float</em>) – outlier threshold used to define <cite>lower_lim</cite> and <cite>upper_lim</cite></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.Fasta">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">Fasta</code><span class="sig-paren">(</span><em>fasta_fn</em>, <em>dry_run=False</em>, <em>force_in_mem=False</em>, <em>assume_dna_base=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#Fasta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.Fasta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fasta file sequence format wrapper class. Will load faidx via <code class="docutils literal notranslate"><span class="pre">pyfaidx</span></code> package if installed, else the fasta will be loaded into memory for sequence extraction.</p>
+<dl class="method">
+<dt id="tombo.tombo_helper.Fasta.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>fasta_fn</em>, <em>dry_run=False</em>, <em>force_in_mem=False</em>, <em>assume_dna_base=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#Fasta.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.Fasta.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a fasta</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fasta_fn</strong> (<em>str</em>) – path to fasta file</li>
+<li><strong>dry_run</strong> (<em>bool</em>) – when pyfaidx is not installed, don’t actually read sequence into memory.</li>
+<li><strong>force_in_mem</strong> (<em>bool</em>) – force genome to be loaded into memory even if pyfaidx is installed allowing on-disk access</li>
+<li><strong>assume_dna_bases</strong> (<em>bool</em>) – skip check for DNA or RNA bases (default: False)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.Fasta.get_seq">
+<code class="descname">get_seq</code><span class="sig-paren">(</span><em>chrm</em>, <em>start=None</em>, <em>end=None</em>, <em>error_end=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#Fasta.get_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.Fasta.get_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract sequence from a specific genomic region. Note if provided, start and end must both be provided or they will be ignored.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>chrm</strong> (<em>str</em>) – chromosome name</li>
+<li><strong>start</strong> (<em>int</em>) – 0-based start position</li>
+<li><strong>end</strong> (<em>int</em>) – 0-based open-interval end position</li>
+<li><strong>error_end</strong> (<em>bool</em>) – raise an error when the region requested extends beyond the chromosome (default: True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Genomic sequence requested. Sequence is converted to RNA sequence if applicable.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_helper.Fasta.iter_chrms">
+<code class="descname">iter_chrms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#Fasta.iter_chrms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.Fasta.iter_chrms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over chromosome names</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_helper.seqSampleType">
+<em class="property">class </em><code class="descclassname">tombo.tombo_helper.</code><code class="descname">seqSampleType</code><a class="reference internal" href="_modules/tombo/tombo_helper.html#seqSampleType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.seqSampleType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of a sequencing sample type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) – name of the sequencing sample</li>
+<li><strong>rev_sig</strong> (<em>bool</em>) – Is the raw signal reversed (3’ to 5’)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_helper.get_seq_sample_type">
+<code class="descclassname">tombo.tombo_helper.</code><code class="descname">get_seq_sample_type</code><span class="sig-paren">(</span><em>fast5_data=None</em>, <em>reads_index=None</em>, <em>fast5_fns=None</em>, <em>num_reads=50</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#get_seq_sample_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.get_seq_sample_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sequencing sample type from a single read or set of reads</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fast5_data</strong> (<cite>h5py.File</cite>) – open read h5py File object</li>
+<li><strong>reads_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.TomboReads" title="tombo.tombo_helper.TomboReads"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.TomboReads</span></code></a>) – </li>
+<li><strong>fast5_fns</strong> (<em>list</em>) – FAST5 read filenames</li>
+<li><strong>num_reads</strong> (<em>int</em>) – sample of reads to check for sample type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_helper.get_raw_read_slot">
+<code class="descclassname">tombo.tombo_helper.</code><code class="descname">get_raw_read_slot</code><span class="sig-paren">(</span><em>fast5_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#get_raw_read_slot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.get_raw_read_slot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the raw read slot from this FAST5 read file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fast5_data</strong> (<cite>h5py.File</cite>) – open FAST5 read file object</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">all_aw_signal</span> <span class="o">=</span> <span class="n">get_raw_read_slot</span><span class="p">(</span><span class="n">fast5_data</span><span class="p">)[</span><span class="s1">&#39;Signal&#39;</span><span class="p">][:]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The HDF5 group slot containing the raw signal data.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_helper.get_single_slot_read_centric">
+<code class="descclassname">tombo.tombo_helper.</code><code class="descname">get_single_slot_read_centric</code><span class="sig-paren">(</span><em>r_data</em>, <em>slot_name</em>, <em>corr_grp=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#get_single_slot_read_centric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.get_single_slot_read_centric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract read-centric slot_name from this read’s Events table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fast5_data</strong> (<a class="reference internal" href="#tombo.tombo_helper.readData" title="tombo.tombo_helper.readData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.readData</span></code></a> or an open <code class="docutils literal notranslate"><span class="pre">h5py.File</span></code> object) – </li>
+<li><strong>slot_name</strong> (<em>str</em>) – slot from which to extract data (valid values: norm_mean, norm_stdev, start, length, base)</li>
+<li><strong>corr_grp</strong> (<em>str</em>) – corrected group slot from which to extract data (default: use value from <code class="docutils literal notranslate"><span class="pre">fast5_data</span></code> object; required for <code class="docutils literal notranslate"><span class="pre">h5py.File</span></code>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_helper.get_multiple_slots_read_centric">
+<code class="descclassname">tombo.tombo_helper.</code><code class="descname">get_multiple_slots_read_centric</code><span class="sig-paren">(</span><em>r_data</em>, <em>slot_names</em>, <em>corr_grp=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_helper.html#get_multiple_slots_read_centric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_helper.get_multiple_slots_read_centric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract multiple read-centric slot_names from this read’s Events table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fast5_data</strong> (<a class="reference internal" href="#tombo.tombo_helper.readData" title="tombo.tombo_helper.readData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.readData</span></code></a> or an open <code class="docutils literal notranslate"><span class="pre">h5py.File</span></code> object) – </li>
+<li><strong>slot_name</strong> (<em>str</em>) – slot from which to extract data (valid values: norm_mean, norm_stdev, start, length, base)</li>
+<li><strong>corr_grp</strong> (<em>str</em>) – corrected group slot from which to extract data (default: use value from <code class="docutils literal notranslate"><span class="pre">fast5_data</span></code> object; required for <code class="docutils literal notranslate"><span class="pre">h5py.File</span></code>)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A tuple of numpy arrays specified by the <code class="docutils literal notranslate"><span class="pre">slot_names</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tombo.tombo_stats">
+<span id="tombo-tombo-stats-module"></span><h2>tombo.tombo_stats module<a class="headerlink" href="#module-tombo.tombo_stats" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tombo.tombo_stats.TomboStats">
+<em class="property">class </em><code class="descclassname">tombo.tombo_stats.</code><code class="descname">TomboStats</code><span class="sig-paren">(</span><em>stats_fn</em>, <em>stat_type=None</em>, <em>region_size=None</em>, <em>cov_damp_counts=None</em>, <em>cov_thresh=None</em>, <em>num_most_signif=None</em>, <em>most_signif_num_batches=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse and retrieve relevant information from a standard (per-genomic base) Tombo statistics file.</p>
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>stats_fn</em>, <em>stat_type=None</em>, <em>region_size=None</em>, <em>cov_damp_counts=None</em>, <em>cov_thresh=None</em>, <em>num_most_signif=None</em>, <em>most_signif_num_batches=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse or open for writing a standard (per-genomic base) Tombo statistics file.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">tombo_stats</span><span class="o">.</span><span class="n">TomboStats</span><span class="p">(</span><span class="s1">&#39;path/to/stats.file&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">chrm</span><span class="p">,</span> <span class="n">strand</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">frac</span><span class="p">,</span> <span class="n">damp_frac</span><span class="p">,</span> <span class="n">valid_cov</span> <span class="ow">in</span> <span class="n">stats</span><span class="o">.</span><span class="n">iter_most_signif_sites</span><span class="p">():</span>
+    <span class="c1"># do stuff</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stats_fn</strong> (<em>str</em>) – filename for previously saved tombo stats</li>
+<li><strong>stat_type</strong> (<em>str</em>) – type of statistic (model_compare, de_novo, or sample_compare); only applicable for new file writing</li>
+<li><strong>region_size</strong> (<em>int</em>) – size of chunked storage blocks; only applicable for new file writing</li>
+<li><strong>cov_damp_counts</strong> (<em>tuple</em>) – pseudo-counts for modified and un-modified reads to compute <code class="docutils literal notranslate"><span class="pre">damp_frac</span></code></li>
+<li><strong>cov_thresh</strong> (<em>int</em>) – only sites with coverage greater than or equal to this value will be stored</li>
+<li><strong>num_most_signif</strong> (<em>int</em>) – number of most significant sites to be stored for faster access</li>
+<li><strong>most_signif_num_batches</strong> (<em>int</em>) – number of region batches to store before re-computing the most significant array (default: 10)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If all arguments are provided the current file’s contents will be deleted.</p>
+<p class="last">Intended to open a fresh <code class="docutils literal notranslate"><span class="pre">TomboStats</span></code> file for writing.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close open HDF5 file and write most significant sites if open for writing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.compute_motif_stats">
+<code class="descname">compute_motif_stats</code><span class="sig-paren">(</span><em>motif_descs</em>, <em>genome_index</em>, <em>stats_per_block=None</em>, <em>total_stats_limit=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.compute_motif_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.compute_motif_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute lists of statistic values and whether this site represents a match to the provided motifs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>motif_descs</strong> (list; see <a class="reference internal" href="#tombo.tombo_helper.parse_motif_descs" title="tombo.tombo_helper.parse_motif_descs"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.parse_motif_descs</span></code></a>) – containing tuples with <a class="reference internal" href="#tombo.tombo_helper.TomboMotif" title="tombo.tombo_helper.TomboMotif"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.TomboMotif</span></code></a> and motif/modification names</li>
+<li><strong>genome_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.Fasta" title="tombo.tombo_helper.Fasta"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.Fasta</span></code></a>) – genome index</li>
+<li><strong>stats_per_block</strong> (<em>int</em>) – statistics to include in calculations per-block (<cite>–multiprocess-region-size</cite>)</li>
+<li><strong>total_stats_limit</strong> (<em>int</em>) – maximum total statistics to include in computation (Default: include all stats)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Dictionary with (key) motif/modification name and (value) list of tuples containing statistic value and boolean motif match</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.get_most_signif_regions">
+<code class="descname">get_most_signif_regions</code><span class="sig-paren">(</span><em>num_bases</em>, <em>num_regions</em>, <em>unique_pos=True</em>, <em>prepend_loc_to_text=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.get_most_signif_regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.get_most_signif_regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select regions centered on locations with the largest fraction of modified bases</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>num_bases</strong> (<em>int</em>) – number of bases to output</li>
+<li><strong>num_regions</strong> (<em>int</em>) – number of regions to output</li>
+<li><strong>unique_pos</strong> (<em>bool</em>) – get only unique positions (optional; default True) intervals may overlap, but identified significant position is outside other intervals</li>
+<li><strong>prepend_loc_to_text</strong> (<em>bool</em>) – pre-prend most significant location to the region text (can be off for interval near start/end of sequence records)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of <a class="reference internal" href="#tombo.tombo_helper.intervalData" title="tombo.tombo_helper.intervalData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.intervalData</span></code></a> objects</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.get_pos_frac">
+<code class="descname">get_pos_frac</code><span class="sig-paren">(</span><em>chrm</em>, <em>strand</em>, <em>pos</em>, <em>missing_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.get_pos_frac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.get_pos_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract statistic value from the requested genomic position.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.iter_most_signif_sites">
+<code class="descname">iter_most_signif_sites</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.iter_most_signif_sites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.iter_most_signif_sites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate through statistics table yeilding (chrm, strand, pos, frac, damp_frac).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.iter_stat_seqs">
+<code class="descname">iter_stat_seqs</code><span class="sig-paren">(</span><em>genome_index</em>, <em>before_bases</em>, <em>after_bases</em>, <em>include_pos=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.iter_stat_seqs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.iter_stat_seqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate through most significant genomic sites returning the genomic sequence surrounding each position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>genome_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.Fasta" title="tombo.tombo_helper.Fasta"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.Fasta</span></code></a>) – genome index object</li>
+<li><strong>before_bases</strong> (<em>int</em>) – number of sequence bases before positions to include</li>
+<li><strong>after_bases</strong> (<em>int</em>) – number of sequence bases after positions to include</li>
+<li><strong>include_pos</strong> (<em>bool</em>) – yeild (pos_seq, chrm, strand, start, end) for each site (default: True)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboStats.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboStats.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboStats.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return next statistics block from file including (chrm, strand, block start, block end and statistics table <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">structured</span> <span class="pre">array</span></code>)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_stats.PerReadStats">
+<em class="property">class </em><code class="descclassname">tombo.tombo_stats.</code><code class="descname">PerReadStats</code><span class="sig-paren">(</span><em>per_read_stats_fn</em>, <em>stat_type=None</em>, <em>region_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#PerReadStats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.PerReadStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store and accses per-read modified base testing statistics</p>
+<dl class="method">
+<dt id="tombo.tombo_stats.PerReadStats.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>per_read_stats_fn</em>, <em>stat_type=None</em>, <em>region_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#PerReadStats.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.PerReadStats.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open per-read statistics file.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">per_read_stats</span> <span class="o">=</span> <span class="n">tombo_stats</span><span class="o">.</span><span class="n">PerReadStats</span><span class="p">(</span><span class="s1">&#39;path/to/sample.tombo.per_read_stats&#39;</span><span class="p">)</span>
+<span class="n">int_data</span> <span class="o">=</span> <span class="n">tombo_helper</span><span class="o">.</span><span class="n">intervalData</span><span class="p">(</span>
+    <span class="n">chrm</span><span class="o">=</span><span class="s1">&#39;chr20&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">10100</span><span class="p">,</span> <span class="n">strand</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+<span class="n">reg_per_read_stats</span> <span class="o">=</span> <span class="n">per_read_stats</span><span class="o">.</span><span class="n">get_region_per_read_stats</span><span class="p">(</span>
+    <span class="n">int_data</span><span class="p">,</span> <span class="n">num_reads</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>per_read_stats_fn</strong> (<em>str</em>) – filename containing (or to write) per-read Tombo statistics</li>
+<li><strong>stat_type</strong> (<em>str</em>) – type of statistic (model_compare, de_novo, or sample_compare); only applicable for new file writing</li>
+<li><strong>region_size</strong> (<em>int</em>) – size of chunked storage blocks; only applicable for new file writing</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">stat_type</span></code> and <code class="docutils literal notranslate"><span class="pre">region_size</span></code> are provided the current file’s contents will be deleted.</p>
+<p class="last">Intended to open a fresh <code class="docutils literal notranslate"><span class="pre">PerReadStats</span></code> file for writing.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.PerReadStats.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#PerReadStats.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.PerReadStats.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close HDF5 file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.PerReadStats.compute_motif_stats">
+<code class="descname">compute_motif_stats</code><span class="sig-paren">(</span><em>motif_descs</em>, <em>genome_index</em>, <em>stats_per_block=None</em>, <em>total_stats_limit=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#PerReadStats.compute_motif_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.PerReadStats.compute_motif_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute lists of statistic values and whether this site represents a match to the provided motifs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>motif_descs</strong> (list; see <a class="reference internal" href="#tombo.tombo_helper.parse_motif_descs" title="tombo.tombo_helper.parse_motif_descs"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.parse_motif_descs</span></code></a>) – containing tuples with <a class="reference internal" href="#tombo.tombo_helper.TomboMotif" title="tombo.tombo_helper.TomboMotif"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.TomboMotif</span></code></a> and motif/modification names</li>
+<li><strong>genome_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.Fasta" title="tombo.tombo_helper.Fasta"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.Fasta</span></code></a>) – genome index</li>
+<li><strong>stats_per_block</strong> (<em>int</em>) – statistics to include in calculations per-block (<cite>–multiprocess-region-size</cite>)</li>
+<li><strong>total_stats_limit</strong> (<em>int</em>) – maximum total statistics to include in computation (Default: include all stats)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Dictionary with (key) motif/modification name and (value) list of tuples containing statistic value and boolean motif match</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.PerReadStats.get_region_per_read_stats">
+<code class="descname">get_region_per_read_stats</code><span class="sig-paren">(</span><em>interval_data</em>, <em>num_reads=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#PerReadStats.get_region_per_read_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.PerReadStats.get_region_per_read_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract per-read statistics over the specifed interval.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>interval_data</strong> (<a class="reference internal" href="#tombo.tombo_helper.intervalData" title="tombo.tombo_helper.intervalData"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.intervalData</span></code></a>) – genomic interval</li>
+<li><strong>num_reads</strong> (<em>int</em>) – randomly select this many reads (default: inlcude all reads)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>np.array</cite> structured array containing <code class="docutils literal notranslate"><span class="pre">pos</span></code>, <code class="docutils literal notranslate"><span class="pre">stat</span></code> and <code class="docutils literal notranslate"><span class="pre">read_id</span></code> for per-read stats over requested interval</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.PerReadStats.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#PerReadStats.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.PerReadStats.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return next per-read statistics block from file including (chrm, strand, block start, block end and per-read statistics table <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">structured</span> <span class="pre">array</span></code>)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tombo.tombo_stats.TomboModel">
+<em class="property">class </em><code class="descclassname">tombo.tombo_stats.</code><code class="descname">TomboModel</code><span class="sig-paren">(</span><em>ref_fn=None</em>, <em>is_text_model=False</em>, <em>kmer_ref=None</em>, <em>central_pos=None</em>, <em>seq_samp_type=None</em>, <em>reads_index=None</em>, <em>fast5_fns=None</em>, <em>minimal_startup=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load, store and access Tombo model attributes and sequence-based expected mean and standard deviation levels (median normalization only).</p>
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboModel.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>ref_fn=None</em>, <em>is_text_model=False</em>, <em>kmer_ref=None</em>, <em>central_pos=None</em>, <em>seq_samp_type=None</em>, <em>reads_index=None</em>, <em>fast5_fns=None</em>, <em>minimal_startup=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboModel.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a Tombo k-mer model object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ref_fn</strong> (<em>str</em>) – tombo model filename</li>
+<li><strong>is_text_model</strong> (<em>bool</em>) – <cite>ref_fn</cite> is text (e.g. <a class="reference external" href="https://github.com/nanoporetech/kmer_models/blob/master/r9.4_180mv_450bps_6mer/template_median68pA.model">https://github.com/nanoporetech/kmer_models/blob/master/r9.4_180mv_450bps_6mer/template_median68pA.model</a>)</li>
+<li><strong>kmer_ref</strong> (<em>list</em>) – containing 3-tuples 1) k-mer 2) expected level 3) level SD</li>
+<li><strong>central_pos</strong> (<em>int</em>) – base within k-mer to assign signal (only applicable when <cite>kmer_ref</cite> is provided)</li>
+<li><strong>seq_samp_type</strong> (<a class="reference internal" href="#tombo.tombo_helper.seqSampleType" title="tombo.tombo_helper.seqSampleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.seqSampleType</span></code></a>) – sequencing sample type (default: None)</li>
+<li><strong>reads_index</strong> (<a class="reference internal" href="#tombo.tombo_helper.TomboReads" title="tombo.tombo_helper.TomboReads"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.TomboReads</span></code></a>) – For determining <cite>seq_samp_type</cite></li>
+<li><strong>fast5_fns</strong> (<em>list</em>) – fast5 read filenames from which to extract read metadata. For determining <cite>seq_samp_type</cite></li>
+<li><strong>minimal_startup</strong> (<em>bool</em>) – don’t compute inverse variances (default True)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<dl class="docutils">
+<dt>Order of priority for initialization when multiple model specifications are provided:</dt>
+<dd><ol class="first last arabic simple">
+<li><cite>ref_fn</cite></li>
+<li><cite>kmer_ref</cite> (requires <cite>central_pos</cite>)</li>
+<li><cite>seq_samp_type</cite></li>
+<li><cite>reads_index</cite></li>
+<li><cite>fast5_fns</cite></li>
+</ol>
+</dd>
+</dl>
+<p class="last">Last 3 options load a default model file included with Tombo. Last 2 determine the sample type from read metadata.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboModel.reverse_sequence_copy">
+<code class="descname">reverse_sequence_copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboModel.reverse_sequence_copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboModel.reverse_sequence_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of model for processing sequence/signal in reverse (default models are all saved in genome sequence forward (5p to 3p) direction)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tombo.tombo_stats.TomboModel.write_model">
+<code class="descname">write_model</code><span class="sig-paren">(</span><em>ref_fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#TomboModel.write_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.TomboModel.write_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write TomboModel to specified file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ref_fn</strong> (<em>str</em>) – filename to write TomboModel</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_stats.normalize_raw_signal">
+<code class="descclassname">tombo.tombo_stats.</code><code class="descname">normalize_raw_signal</code><span class="sig-paren">(</span><em>all_raw_signal</em>, <em>read_start_rel_to_raw=0</em>, <em>read_obs_len=None</em>, <em>norm_type='median'</em>, <em>outlier_thresh=None</em>, <em>channel_info=None</em>, <em>scale_values=None</em>, <em>event_means=None</em>, <em>model_means=None</em>, <em>model_inv_vars=None</em>, <em>const_scale=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#normalize_raw_signal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.normalize_raw_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply scaling and windsorizing parameters to normalize raw signal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>all_raw_signal</strong> (<cite>np.array</cite>) – raw nanopore signal obervation values</li>
+<li><strong>read_start_rel_to_raw</strong> (<em>int</em>) – amount of signal to trim from beginning of the signal (default: 0)</li>
+<li><strong>read_obs_len</strong> (<em>int</em>) – length of signal to process from <cite>read_start_rel_to_raw</cite> (default: full length)</li>
+<li><strong>norm_type</strong> (<em>str</em>) – normalization type (<cite>median</cite> (default), <cite>none</cite>, <cite>pA_raw</cite>, <cite>pA</cite>, <cite>median_const_scale</cite>, <cite>robust_median</cite>; ignored is <code class="docutils literal notranslate"><span class="pre">scale_values</span></code> provided)</li>
+<li><strong>outlier_thresh</strong> (<em>float</em>) – windsorizing threshold (MAD units; default: None)</li>
+<li><strong>channel_info</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.channelInfo</span></code>) – channel information (optional; only for <cite>pA</cite> and <cite>pA_raw</cite>)</li>
+<li><strong>scale_values</strong> (<a class="reference internal" href="#tombo.tombo_helper.scaleValues" title="tombo.tombo_helper.scaleValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.scaleValues</span></code></a>) – scaling values (optional)</li>
+<li><strong>event_means</strong> (<cite>np.array</cite>) – for <cite>pA</cite> fitted scaling parameters (optional)</li>
+<li><strong>model_means</strong> (<cite>np.array</cite>) – for <cite>pA</cite> fitted scaling parameters (optional)</li>
+<li><strong>model_inv_vars</strong> (<cite>np.array</cite>) – for <cite>pA</cite> fitted scaling parameters (optional)</li>
+<li><strong>const_scale</strong> (<em>float</em>) – global scale parameter (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>Normalized signal and scaling parameters</p>
+<ol class="arabic simple">
+<li>normalized signal observations (<cite>np.array::np.float64</cite>)</li>
+<li><a class="reference internal" href="#tombo.tombo_helper.scaleValues" title="tombo.tombo_helper.scaleValues"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.scaleValues</span></code></a></li>
+</ol>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_stats.compute_base_means">
+<code class="descclassname">tombo.tombo_stats.</code><code class="descname">compute_base_means</code><span class="sig-paren">(</span><em>all_raw_signal</em>, <em>base_starts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#compute_base_means"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.compute_base_means" title="Permalink to this definition">¶</a></dt>
+<dd><p>Efficiently compute new base mean values from raw signal and base start positions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>all_raw_signal</strong> (<cite>np.array</cite>) – raw nanopore signal obervation values</li>
+<li><strong>base_starts</strong> (<cite>np.array::np.int32</cite>) – 0-based base start positions within raw signal</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>np.array::np.float64</cite> containing base mean levels</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_stats.get_read_seg_score">
+<code class="descclassname">tombo.tombo_stats.</code><code class="descname">get_read_seg_score</code><span class="sig-paren">(</span><em>r_means</em>, <em>r_ref_means</em>, <em>r_ref_sds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#get_read_seg_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.get_read_seg_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute expected to observed signal matching score</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r_means</strong> (<cite>np.array::np.float64</cite>) – observed base signal levels</li>
+<li><strong>r_ref_means</strong> (<cite>np.array::np.float64</cite>) – expected base signal levels</li>
+<li><strong>r_ref_sds</strong> (<cite>np.array::np.float64</cite>) – expected base signal level sds</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Mean half z-score for observed versus expected signal levels</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_stats.get_ref_from_seq">
+<code class="descclassname">tombo.tombo_stats.</code><code class="descname">get_ref_from_seq</code><span class="sig-paren">(</span><em>seq</em>, <em>std_ref</em>, <em>rev_strand=False</em>, <em>alt_ref=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#get_ref_from_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.get_ref_from_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute expected signal levels for a sequence from a reference model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>seq</strong> (<em>str</em>) – genomic seqeunce to be converted to expected signal levels</li>
+<li><strong>std_ref</strong> (<a class="reference internal" href="#tombo.tombo_stats.TomboModel" title="tombo.tombo_stats.TomboModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_stats.TomboModel</span></code></a>) – expected signal level model</li>
+<li><strong>rev_strand</strong> (<em>bool</em>) – flip sequence (after extracting k-mers for expected level model lookup)</li>
+<li><strong>alt_ref</strong> (<a class="reference internal" href="#tombo.tombo_stats.TomboModel" title="tombo.tombo_stats.TomboModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_stats.TomboModel</span></code></a>) – an alternative expected signal level model</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Returned expected signal levels will be trimmed compared to the passed sequence based on the <cite>std_ref.kmer_width</cite> and <cite>std_ref.central_pos</cite>.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Expected signal level references<ol class="arabic simple">
+<li>ref_means (<cite>np.array::np.float64</cite>) expected signal levels</li>
+<li>ref_sds (<cite>np.array::np.float64</cite>) expected signal level sds</li>
+<li>alt_means (<cite>np.array::np.float64</cite>) alternate expected signal levels</li>
+<li>alt_sds (<cite>np.array::np.float64</cite>) alternate expected signal level sds</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_stats.calc_kmer_fitted_shift_scale">
+<code class="descclassname">tombo.tombo_stats.</code><code class="descname">calc_kmer_fitted_shift_scale</code><span class="sig-paren">(</span><em>prev_shift</em>, <em>prev_scale</em>, <em>r_event_means</em>, <em>r_model_means</em>, <em>r_model_inv_vars=None</em>, <em>method='theil_sen'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#calc_kmer_fitted_shift_scale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.calc_kmer_fitted_shift_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use robust Theil-Sen estimator to compute fitted shift and scale parameters based on read sequence</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>prev_shift</strong> (<em>float</em>) – previous shift parameter</li>
+<li><strong>prev_scale</strong> (<em>float</em>) – previous scale parameter</li>
+<li><strong>r_ref_means</strong> (<cite>np.array::np.float64</cite>) – expected base signal levels</li>
+<li><strong>r_ref_sds</strong> (<cite>np.array::np.float64</cite>) – expected base signal level sds</li>
+<li><strong>r_model_inv_vars</strong> (<cite>np.array::np.float64</cite>) – expected base signal level inverse variances for method of moments (<cite>mom</cite>) computation</li>
+<li><strong>method</strong> (<em>str</em>) – one of <cite>theil_sen</cite>, <cite>robust</cite>, or <cite>mom</cite></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>Sequence-fitted scaling parameters</p>
+<ol class="arabic simple">
+<li>shift parameter (float)</li>
+<li>scale parameter (float)</li>
+<li>shift correction factor; multiply by <code class="docutils literal notranslate"><span class="pre">prev_scale</span></code> and add to <code class="docutils literal notranslate"><span class="pre">prev_shift</span></code> to get <code class="docutils literal notranslate"><span class="pre">shift</span></code> (float)</li>
+<li>scale correction factor; multiply by <code class="docutils literal notranslate"><span class="pre">prev_scale</span></code> to get <code class="docutils literal notranslate"><span class="pre">scale</span></code> (float)</li>
+</ol>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_stats.load_resquiggle_parameters">
+<code class="descclassname">tombo.tombo_stats.</code><code class="descname">load_resquiggle_parameters</code><span class="sig-paren">(</span><em>seq_samp_type</em>, <em>sig_aln_params=None</em>, <em>seg_params=None</em>, <em>use_save_bandwidth=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#load_resquiggle_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.load_resquiggle_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load parameters for re-squiggle algorithm</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>seq_samp_type</strong> (<a class="reference internal" href="#tombo.tombo_helper.seqSampleType" title="tombo.tombo_helper.seqSampleType"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.seqSampleType</span></code></a>) – sequencing sample type</li>
+<li><strong>sig_aln_params</strong> (<em>tuple</em>) – signal alignment parameters (optional; default: load seq_samp_type defaults)</li>
+<li><strong>seg_params</strong> (<em>tuple</em>) – segmentation parameters (optional; default: load seq_samp_type defaults)</li>
+<li><strong>use_save_bandwidth</strong> (<em>bool</em>) – load larger “save” bandwidth</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#tombo.tombo_helper.resquiggleParams" title="tombo.tombo_helper.resquiggleParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">tombo.tombo_helper.resquiggleParams</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tombo.tombo_stats.compute_num_events">
+<code class="descclassname">tombo.tombo_stats.</code><code class="descname">compute_num_events</code><span class="sig-paren">(</span><em>signal_len</em>, <em>seq_len</em>, <em>mean_obs_per_event</em>, <em>min_event_to_seq_ratio=1.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tombo/tombo_stats.html#compute_num_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tombo.tombo_stats.compute_num_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute number of events to find for this read</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>signal_len</strong> (<em>int</em>) – length of raw signal</li>
+<li><strong>seq_len</strong> (<em>int</em>) – length of sequence</li>
+<li><strong>mean_obs_per_base</strong> (<em>int</em>) – mean raw observations per genome base</li>
+<li><strong>min_event_to_seq_ratio</strong> (<em>float</em>) – minimum event to sequence ratio (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Number of events to find for this read</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="model_training.html" class="btn btn-neutral" title="Model Training (Advanced Users Only)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-18, Oxford Nanopore Technologies.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.4',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Tombo’s documentation! &mdash; Tombo 1.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tombo Commands" href="examples.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Tombo
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tombo Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resquiggle.html">Re-squiggle Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modified_base_detection.html">Modified Base Detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text_output.html">Text Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filtering.html">Read Filtering Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rna.html">RNA Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_training.html">Model Training (Advanced Users Only)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tombo.html">tombo package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Tombo</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to Tombo’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-tombo-s-documentation">
+<h1>Welcome to Tombo’s documentation!<a class="headerlink" href="#welcome-to-tombo-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Tombo is a suite of tools primarily for the identification of modified nucleotides from nanopore sequencing data.</p>
+<p>Tombo also provides tools for the analysis and visualization of raw nanopore signal.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://bioconda.github.io/recipes/ont-tombo/README.html"><img alt="bioconda_badge" src="https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat-square" /></a> <a class="reference external" href="https://badge.fury.io/py/ont-tombo"><img alt="pypi_badge" src="https://badge.fury.io/py/ont-tombo.svg" /></a></p>
+<p>Basic tombo installation (python 2.7 and 3.4+ support)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># install via bioconda environment</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">bioconda</span> <span class="n">ont</span><span class="o">-</span><span class="n">tombo</span>
+
+<span class="c1"># or install pip package (numpy install required before tombo for cython optimization)</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">ont</span><span class="o">-</span><span class="n">tombo</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="examples.html"><span class="doc">Tombo Commands</span></a> for common workflows.</p>
+<div class="section" id="quick-start">
+<h3>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h3>
+<p>Re-squiggle raw nanopore read files and call 5mC and 6mA sites.</p>
+<p>Then, for 5mA calls, output genome browser <a class="reference external" href="https://genome.ucsc.edu/goldenpath/help/wiggle.html">wiggle format file</a> and, for 6mA calls, plot raw signal around most significant locations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># skip this step if FAST5 files already contain basecalls</span>
+<span class="n">tombo</span> <span class="n">preprocess</span> <span class="n">annotate_raw_with_fastqs</span> <span class="o">--</span><span class="n">fast5</span><span class="o">-</span><span class="n">basedir</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fast5s</span><span class="o">/</span> \
+    <span class="o">--</span><span class="n">fastq</span><span class="o">-</span><span class="n">filenames</span> <span class="n">basecalls1</span><span class="o">.</span><span class="n">fastq</span> <span class="n">basecalls2</span><span class="o">.</span><span class="n">fastq</span> \
+    <span class="o">--</span><span class="n">sequencing</span><span class="o">-</span><span class="n">summary</span><span class="o">-</span><span class="n">filenames</span> <span class="n">seq_summary1</span><span class="o">.</span><span class="n">txt</span> <span class="n">seq_summary2</span><span class="o">.</span><span class="n">txt</span> \
+    <span class="o">--</span><span class="n">processes</span> <span class="mi">4</span>
+
+<span class="n">tombo</span> <span class="n">resquiggle</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fast5s</span><span class="o">/</span> <span class="n">genome</span><span class="o">.</span><span class="n">fasta</span> <span class="o">--</span><span class="n">processes</span> <span class="mi">4</span>
+<span class="n">tombo</span> <span class="n">detect_modifications</span> <span class="n">alternative_model</span> <span class="o">--</span><span class="n">fast5</span><span class="o">-</span><span class="n">basedirs</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fast5s</span><span class="o">/</span> \
+    <span class="o">--</span><span class="n">statistics</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">basename</span> <span class="n">sample</span><span class="o">.</span><span class="n">alt_modified_base_detection</span> \
+    <span class="o">--</span><span class="n">per</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">statistics</span><span class="o">-</span><span class="n">basename</span> <span class="n">sample</span><span class="o">.</span><span class="n">alt_modified_base_detection</span> \
+    <span class="o">--</span><span class="n">alternate</span><span class="o">-</span><span class="n">bases</span> <span class="mi">5</span><span class="n">mC</span> <span class="mi">6</span><span class="n">mA</span> <span class="o">--</span><span class="n">processes</span> <span class="mi">4</span>
+
+<span class="c1"># produces &quot;estimated fraction of modified reads&quot; genome browser files</span>
+<span class="c1"># for 5mC testing</span>
+<span class="n">tombo</span> <span class="n">text_output</span> <span class="n">browser_files</span> <span class="o">--</span><span class="n">statistics</span><span class="o">-</span><span class="n">filename</span> <span class="n">sample</span><span class="o">.</span><span class="n">alt_modified_base_detection</span><span class="o">.</span><span class="mi">5</span><span class="n">mC</span><span class="o">.</span><span class="n">tombo</span><span class="o">.</span><span class="n">stats</span> \
+    <span class="o">--</span><span class="n">file</span><span class="o">-</span><span class="n">types</span> <span class="n">dampened_fraction</span> <span class="o">--</span><span class="n">browser</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">basename</span> <span class="n">sample</span><span class="o">.</span><span class="n">alt_modified_base_detection</span><span class="o">.</span><span class="mi">5</span><span class="n">mC</span>
+<span class="c1"># and 6mA testing (along with coverage bedgraphs)</span>
+<span class="n">tombo</span> <span class="n">text_output</span> <span class="n">browser_files</span> <span class="o">--</span><span class="n">statistics</span><span class="o">-</span><span class="n">filename</span> <span class="n">sample</span><span class="o">.</span><span class="n">alt_modified_base_detection</span><span class="o">.</span><span class="mi">6</span><span class="n">mA</span><span class="o">.</span><span class="n">tombo</span><span class="o">.</span><span class="n">stats</span> \
+    <span class="o">--</span><span class="n">fast5</span><span class="o">-</span><span class="n">basedirs</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fast5s</span><span class="o">/</span>  <span class="o">--</span><span class="n">file</span><span class="o">-</span><span class="n">types</span> <span class="n">dampened_fraction</span> <span class="n">coverage</span>\
+    <span class="o">--</span><span class="n">browser</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">basename</span> <span class="n">sample</span><span class="o">.</span><span class="n">alt_modified_base_detection</span><span class="o">.</span><span class="mi">6</span><span class="n">mA</span>
+
+<span class="c1"># plot raw signal at most significant 6mA locations</span>
+<span class="n">tombo</span> <span class="n">plot</span> <span class="n">most_significant</span> <span class="o">--</span><span class="n">fast5</span><span class="o">-</span><span class="n">basedirs</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fast5s</span><span class="o">/</span> \
+    <span class="o">--</span><span class="n">statistics</span><span class="o">-</span><span class="n">filename</span> <span class="n">sample</span><span class="o">.</span><span class="n">alt_modified_base_detection</span><span class="o">.</span><span class="mi">6</span><span class="n">mA</span><span class="o">.</span><span class="n">tombo</span><span class="o">.</span><span class="n">stats</span> \
+    <span class="o">--</span><span class="n">plot</span><span class="o">-</span><span class="n">standard</span><span class="o">-</span><span class="n">model</span> <span class="o">--</span><span class="n">plot</span><span class="o">-</span><span class="n">alternate</span><span class="o">-</span><span class="n">model</span> <span class="mi">6</span><span class="n">mA</span> \
+    <span class="o">--</span><span class="n">pdf</span><span class="o">-</span><span class="n">filename</span> <span class="n">sample</span><span class="o">.</span><span class="n">most_significant_6mA_sites</span><span class="o">.</span><span class="n">pdf</span>
+</pre></div>
+</div>
+<p>Detect any deviations from expected signal levels for canonical bases to investigate any type of modification.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tombo</span> <span class="n">resquiggle</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fast5s</span><span class="o">/</span> <span class="n">genome</span><span class="o">.</span><span class="n">fasta</span> <span class="o">--</span><span class="n">processes</span> <span class="mi">4</span>
+<span class="n">tombo</span> <span class="n">detect_modifications</span> <span class="n">de_novo</span> <span class="o">--</span><span class="n">fast5</span><span class="o">-</span><span class="n">basedirs</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fast5s</span><span class="o">/</span> \
+    <span class="o">--</span><span class="n">statistics</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">basename</span> <span class="n">sample</span><span class="o">.</span><span class="n">de_novo_modified_base_detection</span> \
+    <span class="o">--</span><span class="n">per</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">statistics</span><span class="o">-</span><span class="n">basename</span> <span class="n">sample</span><span class="o">.</span><span class="n">de_novo_modified_base_detection</span> \
+    <span class="o">--</span><span class="n">processes</span> <span class="mi">4</span>
+
+<span class="c1"># produces sample.de_novo_modified_base_detection.dampened_fraction.[plus|minus].wig files</span>
+<span class="n">tombo</span> <span class="n">text_output</span> <span class="n">browser_files</span> <span class="o">--</span><span class="n">statistics</span><span class="o">-</span><span class="n">filename</span> <span class="n">sample</span><span class="o">.</span><span class="n">de_novo_modified_base_detection</span><span class="o">.</span><span class="n">tombo</span><span class="o">.</span><span class="n">stats</span> \
+    <span class="o">--</span><span class="n">browser</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">basename</span> <span class="n">sample</span><span class="o">.</span><span class="n">de_novo_modified_base_detection</span> <span class="o">--</span><span class="n">file</span><span class="o">-</span><span class="n">types</span> <span class="n">dampened_fraction</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>All of these commands work for RNA data as well, but a transcriptome reference sequence must be provided for spliced transcripts.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">-h</span></code> to see all Tombo command groups, run <code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">[command-group]</span> <span class="pre">-h</span></code> to see all commands within each group and run <code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">[command-group]</span> <span class="pre">[comand]</span> <span class="pre">-h</span></code> for help with arguments to each Tombo command.</p>
+<p class="last">Detailed documentation for all Tombo algorithms and commands can be found through the links here.</p>
+</div>
+</div>
+</div>
+<div class="section" id="naming">
+<h2>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">¶</a></h2>
+<p>Tombo Ahi is a Japanese name for albacore (the name of the Oxford Nanopore Technologies basecaller). So use albacore to identify canonical bases and then use Tombo to detect more exotic, non-canonical bases.</p>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tombo Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#re-squiggle-raw-signal-genomic-alignment">Re-squiggle (Raw Signal Genomic Alignment)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#modified-base-detection">Modified Base Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#text-output">Text Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#plotting-commands">Plotting Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#read-filtering">Read Filtering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resquiggle.html">Re-squiggle Algorithm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resquiggle.html#algorithm-details">Algorithm Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resquiggle.html#common-failed-read-descriptions">Common Failed Read Descriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resquiggle.html#tombo-fast5-format">Tombo FAST5 Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resquiggle.html#tombo-index-file">Tombo Index File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resquiggle.html#additional-command-line-options">Additional Command Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resquiggle.html#pre-process-raw-reads">Pre-process Raw Reads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resquiggle.html#non-standard-data-locations">Non-standard Data Locations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modified_base_detection.html">Modified Base Detection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#specific-alternate-base-detection-recommended">Specific Alternate Base Detection (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#de-novo-non-canonical-base-method">De novo Non-canonical Base Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#canonical-sample-comparison-method">Canonical Sample Comparison Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#aggregating-per-read-statistics">Aggregating Per-read Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#dampened-fraction-estimates">Dampened Fraction Estimates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#multi-processing">Multi-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#tombo-statistics-file-format">Tombo Statistics File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_base_detection.html#per-read-statistics-file-format">Per-read Statistics File Format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="text_output.html">Text Outputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="text_output.html#tombo-text-output-browser-files"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">text_output</span> <span class="pre">browser_files</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_output.html#tombo-text-output-signif-sequence-context"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">text_output</span> <span class="pre">signif_sequence_context</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#genome-anchored-plotting">Genome Anchored Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#per-read-statistic-plotting">Per-read Statistic Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#motif-centered-statistic-plotting">Motif-centered Statistic Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#other-plotting-commands">Other Plotting Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filtering.html">Read Filtering Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html#tombo-filter-genome-locations"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">filter</span> <span class="pre">genome_locations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html#tombo-filter-raw-signal-matching"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">filter</span> <span class="pre">raw_signal_matching</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html#tombo-filter-q-score"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">filter</span> <span class="pre">q_score</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html#tombo-filter-level-coverage"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">filter</span> <span class="pre">level_coverage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html#tombo-filter-stuck"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">filter</span> <span class="pre">stuck</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html#tombo-filter-clear-filters"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">filter</span> <span class="pre">clear_filters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rna.html">RNA Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rna.html#rna-processing-workflow">RNA Processing Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_training.html">Model Training (Advanced Users Only)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_training.html#tombo-build-model-estimate-reference"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">build_model</span> <span class="pre">estimate_reference</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_training.html#tombo-build-model-estimate-alt-reference"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">build_model</span> <span class="pre">estimate_alt_reference</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_training.html#tombo-build-model-event-resquiggle"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">build_model</span> <span class="pre">event_resquiggle</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_training.html#tombo-build-model-estimate-scale"><code class="docutils literal notranslate"><span class="pre">tombo</span> <span class="pre">build_model</span> <span class="pre">estimate_scale</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="tombo-api-reference">
+<h2>Tombo API Reference<a class="headerlink" href="#tombo-api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tombo.html">tombo package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tombo.html#tombo-python-api">Tombo Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tombo.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tombo.html#module-tombo.resquiggle">tombo.resquiggle module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tombo.html#module-tombo.tombo_helper">tombo.tombo_helper module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tombo.html#module-tombo.tombo_stats">tombo.tombo_stats module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><a class="reference internal" href="genindex.html"><span class="std std-ref">Tombo Module Documentation Index</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples.html" class="btn btn-neutral float-right" title="Tombo Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-18, Oxford Nanopore Technologies.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.4',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
